@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: url('file:///C:/Users/User/OneDrive/Pictures/Saved%20Pictures/cloud.jpg') no-repeat center center/cover;
+            color:white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            background: paleturquoise;
+        }
+        button {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #e68900;
+        }
+        #weather {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            display: none;
+            font-size: 18px;
+            line-height: 1.6;
+            backdrop-filter: blur(10px);
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ Weather App</h1>
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="getWeather()">Get Weather</button>
+        <div id="weather"></div>
+    </div>
+    
+    <script>
+        async function getWeather() {
+            const city = document.getElementById('city').value;
+            if (!city) {
+                alert('Please enter a city name');
+                return;
+            }
+            const apiKey = '78f94a529ac0faf27ca3dce8f99429df'; // Replace with your OpenWeather API key
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.cod !== 200) {
+                    document.getElementById('weather').innerHTML = `<p>${data.message}</p>`;
+                    document.getElementById('weather').style.display = 'block';
+                    return;
+                }
+                
+                document.getElementById('weather').innerHTML = `
+                    <h2>📍 ${data.name}, ${data.sys.country}</h2>
+                    <p>🌡️ Temperature: <strong>${data.main.temp}°C</strong></p>
+                    <p>🌦️ Weather: <strong>${data.weather[0].description}</strong></p>
+                    <p>💧 Humidity: <strong>${data.main.humidity}%</strong></p>
+                `;
+                document.getElementById('weather').style.display = 'block';
+            } catch (error) {
+                document.getElementById('weather').innerHTML = `<p>Error fetching data</p>`;
+                document.getElementById('weather').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
