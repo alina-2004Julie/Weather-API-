@@ -30,3 +30,14 @@ This project helped reinforce my understanding of working with APIs, handling as
 
 Overall, this weather webpage serves as a great example of how external data can be integrated into a webpage dynamically. It demonstrates the practical application of JavaScript and API handling while also focusing on user-friendly design principles. The end result is a functional and visually appealing weather app that provides real-time weather updates to users in a simple and effective manner.
 
+#OUTPUT
+
+![Image](https://github.com/user-attachments/assets/7dc0efa1-bf93-4efd-9238-aba0019e8441)
+
+
+
+![Image](https://github.com/user-attachments/assets/d796c565-1f51-4bdd-b6eb-099f5491713b)
+
+
+
+![Image](https://github.com/user-attachments/assets/a505ff5f-64b8-456d-83b2-5b987805512b)
